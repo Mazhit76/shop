@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 
 def main(request):
+
     content = {
         'title': 'GeekShop'
     }
@@ -20,11 +21,18 @@ def test_context(request):
     context = {
         'title': 'Test Context',
         'header': 'Добро пожловать на сайт!',
-        'username': 'Валера Павликов',
+        'username': 'Иваев Мажит',
         'products': [
-            {'name': 'Худи черного цвета с монограммами adidas Originals', 'price': '6 090,00 руб.'},
-            {'name': 'Синяя куртка The North Face', 'price': '23 725,00 руб.'},
-            {'name': 'Коричневый спортивный oversized-топ ASOS DESIGN', 'price': '3 390,00 руб.'},
+            {'name': 'Худи черного цвета с монограммами adidas Originals', 'price': '5 090,00 руб.'},
+            {'name': 'Синяя куртка The North Face', 'price': '33 725,00 руб.'},
+            {'name': 'Коричневый спортивный oversized-топ ASOS DESIGN', 'price': '4 390,00 руб.'},
         ]
     }
     return render(request, 'mainapp/test_context.html', context)
+
+    return render(request, 'mainapp/index.html')
+
+
+def products(request):
+    return render(request, 'mainapp/products.html')
+
