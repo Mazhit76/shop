@@ -3,3 +3,5 @@ db.sqlite3
 /vendor/*
 /css/*
 !/css/img/
+*/__pycashe__
+.vscode
