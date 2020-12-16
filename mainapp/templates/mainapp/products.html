@@ -14,7 +14,7 @@
             <h1 class="my-4">GeekShop</h1>
             <div class="list-group">
 
-                {% for category in categorys %}
+                {% for category in products.category %}
                     <a href="#" class="list-group-item">{{category.name}}</a>
                 {% endfor %}
 
@@ -51,13 +51,16 @@
             </div>
 
             <div class="row">
-                {% for product in produced %}
+                {% for product in products %}
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
-                                <img class="card-img-top" src="/static/{{ product.path_photo }}" alt="не загружено">
+                                <img class="card-img-top" src="/media/{{ product.image }}" alt="product.short_desc">
                             </a>
                             <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#"> {{product.category.name}} </a>
+                                </h4>                            
                                 <h4 class="card-title">
                                     <a href="#"> {{product.name}} </a>
                                 </h4>
