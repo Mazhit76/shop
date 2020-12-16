@@ -15,23 +15,8 @@
                         Новые образы и лучшие бренды на GeekShop Store.
                         Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
                     </p>
-                    <h4> {{title| title}} </h4>
-                    <h4> {{user_name}} </h4>
-                    <h3> Ваши продукты </h3>
-                    {% for product in products %}
-                    <p>Товар:{{product.name}}, Цена: {{product.price}}</p>
-                    {% endfor %}
-
-                    {% if promotin_produced %}
-                    <h3 style="color:red;" > Промоакция</h3>
-                    {% for promo_product in promotin_produced %}
-                    <p>Товар:{{promo_product.name}}, Цена: {{promo_product.price}}</p>
-                    {% endfor %}
-                    {% else %}
-                    <h3 style="color:red;" > Промоакций нет!!!</h3>
-                    {% endif %}
                     <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                        <a id="start-purchase-link" href="{% url 'products' %}">
+                        <a id="start-purchase-link" href="{% url 'products:index' %}">
                             Начать покупки
                         </a>
                     </button>
