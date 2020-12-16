@@ -1,6 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
-from .models import ProductCategory, Product
+from mainapp.models import ProductCategory, Product
 
 
 def main(request):
@@ -39,20 +39,3 @@ def products(request, pk=None):  # pk-это то что выделено в sho
         'products': products,
     }
     return render(request, 'mainapp/products.html', context=content)
-
-
-def test_context(request):
-    content = {
-        'title': 'Добро пожаловать',
-        'user_name': "Иваев Мажит",
-        'products': [
-            {'name': 'Черное худи', 'price': '2999'},
-            {'name': 'Джинсы', 'price': '4999'},
-        ],
-        'promotion': True,
-        'promotin_produced': [
-            {'name': 'Кроссовки', 'price': '1999'},
-            {'name': 'Майка', 'price': '299'},
-        ],
-    }
-    return render(request, 'mainapp/context.html', context=content)
