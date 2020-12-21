@@ -13,25 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls.conf import include
+
 from shop.settings import MEDIA_ROOT, MEDIA_URL
 from django import urls
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from mainapp import views as mainapp_views
 from django.conf import settings
 from django.conf.urls.static import static
 
 
-app_name = 'mainapp'
-
-
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+    path('auth/', include('authapp.urls')),
     path('', mainapp_views.main, name='main'),
     path('products/', include('mainapp.urls', namespace='products')),
-    path('context/', mainapp_views.test_context),
-    #    path('time_template/', mainapp_views.current_datetime, name='time')
+
 ]
 # Подгружаем файлы изображений, т.е. указываем путь откуда подгружать
 if settings.DEBUG:

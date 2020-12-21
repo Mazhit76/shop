@@ -45,10 +45,18 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-shopping-bag"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Войти <i class="fas fa-sign-in-alt"></i></a>
-                    </li>
+                    </li>                    
+                    {% if user.is_authenticated %}{#Поставили логику на отображение в зависимости от аутотентификации#}
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">{{user.username}}<i class="fas fa-user-circle"></i></a>
+                       <li class="nav-item">
+                           <a class="nav-link" href="{%url 'authapp:logout' %}">Выйти <i class="fas fa-sign-in-alt"></i></a>
+                       </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'authapp:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
