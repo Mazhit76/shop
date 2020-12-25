@@ -6,5 +6,5 @@ urlpatterns = [
     path('', mainapp.products, name='index'),
     # на страницу products иначе ошибка, так как В path('products/', include('mainapp.urls', namespace='products')),
     # в shop urls прописали
-    path('<int:pk>/', mainapp.products, name='category'),
+    path('<int:pk>/', mainapp.products, name='product'),
 ]

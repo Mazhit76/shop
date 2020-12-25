@@ -2,17 +2,17 @@
 {% load staticfiles %}
 <html lang="en">
 <head>
-    <title>
-        {% block title %}
-            {{ title|title }}
-        {% endblock title %}
-    </title>
 
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-sc
     <meta name="description" content="">
     <meta name="author" content="">
+    <title>
+        {% block title %}
+            {{ title|title }}
+        {% endblock title %}
+    </title>
 
     <title>GeekShop</title>
 
@@ -20,13 +20,14 @@
     
 
     <!-- Custom styles for this template -->
+
     <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     
     {% block css %}
     {% endblock css %}
 
-    {% block js %}
-    {% endblock js %}
+
+
 </head>
 <body>
     <div class='container'>
@@ -48,9 +49,9 @@
                     </li>                    
                     {% if user.is_authenticated %}{#Поставили логику на отображение в зависимости от аутотентификации#}
                        <li class="nav-item">
-                           <a class="nav-link" href="#">{{user.username}}<i class="fas fa-user-circle"></i></a>
+                           <a class="nav-link" href="{% url 'authapp:profile' %}">{{user.username}}<i class="fas fa-user-circle"></i></a>
                        <li class="nav-item">
-                           <a class="nav-link" href="{%url 'authapp:logout' %}">Выйти <i class="fas fa-sign-in-alt"></i></a>
+                           <a class="nav-link" href="{% url 'authapp:logout' %}">Выйти <i class="fas fa-sign-in-alt"></i></a>
                        </li>
                     {% else %}
                         <li class="nav-item">
@@ -75,7 +76,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static '/vendor/jquery/jquery.min.js' %}" ></script>
     <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" ></script>
-
+    {% block js %}
+    {% endblock js %}
     <!-- FontAwesome script -->
     <script src="{% static '/vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
 </body>

@@ -1,26 +1,18 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.core.exceptions import ValidationError
-from django.db import models
-from django.forms import fields
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from authapp.models import User
 
 
 class UserLoginForm(AuthenticationForm):
-
     class Meta:
         model = User
         fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
-        # Задали значения placeholdder
-        self.fields['username'].widget.attrs['placeholder'] = 'Введите #имя пользователя'
-        # Задали значения placeholdder
+        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
-            # Теперь все формам присвоен класс с пользовательскими стилями  и можно использовать
-            # и задавть формы отсюда а не в html
 
 
 class UserRegisterForm(UserCreationForm):
@@ -31,8 +23,7 @@ class UserRegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
-        # Задали значения placeholdder- это скопировал с урока 4 в принципе это повтор метода выше
-        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя !пользователя'
+        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['email'].widget.attrs['placeholder'] = 'Введите адрес эл. почты'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите фамилию'
@@ -42,12 +33,17 @@ class UserRegisterForm(UserCreationForm):
             field.widget.attrs['class'] = 'form-control py-4'
             field.help_text = ''
 
-    def clean_age(self):
-        age = self.cleaned_data['age']
-        if age < 18:
-            raise ValidationError(
-                'Вы должны быть совершеннолетним', code='invalid_age')
 
-        return age
-        # Теперь все формам присвоен класс с пользовательскими стилями  и можно использовать
+class UserProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'avatar', 'username', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['readonly'] = True
+        self.fields['email'].widget.attrs['readonly'] = True
+        for field_name, field in self.fields.items():
+            # Теперь все формам присвоен класс с пользовательскими стилями  и можно использовать
+            field.widget.attrs['class'] = 'form-control py-4'
         # и задавть формы отсюда а не в html
