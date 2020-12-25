@@ -32,3 +32,7 @@ def products(request, id=None):  # pk-это то что выделено в sho
         'products': Product.objects.all(),
     }
     return render(request, 'mainapp/products.html', content)
+
+
+def __str__(self):
+    return self.username
