@@ -30,6 +30,7 @@ urlpatterns = [
     path('', mainapp_views.main, name='main'),
     path('products/', include('mainapp.urls', namespace='products')),
     path('baskets/', include('basketapp.urls', namespace='baskets')),
+    path('admin-staff/', include('adminapp.urls', namespace='admin_staff'))
 
 ]
 # Подгружаем файлы изображений, т.е. указываем путь откуда подгружать
