@@ -16,5 +16,12 @@ urlpatterns = [
     path('admin_products_categories/', adminapp.admin_products_categories,
          name='admin_products_categories'),
 
+    path('admin_products_categories/create/', adminapp.admin_products_categories_create,
+         name='admin_products_categories_create'),
 
+    path('admin_products_categories/update/<int:ProductCategory_id>/', adminapp.admin_products_categories_update,
+         name='admin_products_categories_update'),
+
+    path('admin_products_categories/remove/<int:ProductCategory_id>/', adminapp.admin_products_categories_remove,
+         name='admin_products_categories_remove'),
 ]

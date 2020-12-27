@@ -1,13 +1,13 @@
 # Create your views here.
+from mainapp.models import ProductCategory
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 
 from authapp.models import User
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm
+from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, UserAdminProductCategory,  UserAdminCategoriesForm
 
 from django.shortcuts import get_object_or_404
-from adminapp.forms import ProductCategoryEditForm
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -48,7 +48,9 @@ def admin_users_update(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == 'POST':
         form = UserAdminProfileForm(
-            data=request.POST, files=request.FILES, instance=user)
+            data=request.POST, files=request.FILES, instance=user)  # instance Экземпляр формы модели, прикрепленный к объекту модели
+        # атрибут, который дает его методам доступ к этому конкретному экземпляру модели.
+        # Здесь передают  полям текущей формы данные из объекта User
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('admin_staff:admin_users'))
@@ -68,54 +70,61 @@ def admin_users_remove(request, user_id):
     return HttpResponseRedirect(reverse('admin_staff:admin_users'))
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_products_categories(request):
-    title = 'админка/категории'
-    categories_list = ProductCategoryEditForm.objects.all()
+    # R - Read
     context = {
-        'title': title,
-        'objects': categories_list
+        # Внес изменения на свой класс не сработало, надо разбтраться
+        'ProductsCategories': ProductCategory.objects.all(),
     }
-    return render(request, 'adminapp/admin_products_categories.html', context)
+    return render(request, 'adminapp/admin-products-categories.html', context)
 
 
-# def category_create(request):
-#     pass
+@user_passes_test(lambda u: u.is_superuser)
+def admin_products_categories_create(request):
+    # C - Create
+    if request.method == 'POST':
+        form = UserAdminProductCategory(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('adminapp:admin_products_categories'))
+            # Здесь по другому написано было
+        else:
+            print(form.errors)
+    else:
+        form = UserAdminProductCategory()
+    context = {'form': form}
+    return render(request, 'adminapp/admin-products-category-create.html', context)
 
 
-# def category_update(request, pk):
-#     pass
+@user_passes_test(lambda u: u.is_superuser)
+def admin_products_categories_update(request,  ProductCategory_id):
+    # U - Update
+    category = ProductCategory.objects.get(id=ProductCategory_id)
+    if request.method == 'POST':
+        form = UserAdminCategoriesForm(
+            data=request.POST, files=request.FILES, instance=category)
+        # атрибут, который дает его методам доступ к этому конкретному экземпляру модели.
+        # Здесь передают  полям текущей формы данные из объекта ProductCategory
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('admin_staff:admin_products_categories'))
+    else:
+        form = UserAdminCategoriesForm(instance=category)
+
+    context = {
+        'form': form,
+        'ProductCategory': category
+    }
+    return render(request, 'adminapp/admin-products-categories-update-delete.html', context)
 
 
-# def category_delete(request, pk):
-#     pass
-
-
-# def products(request, pk):
-#     title = 'админка/продукт'
-
-#     category = get_object_or_404(ProductCategory, pk=pk)
-#     products_list = Product.objects.filter(category__pk=pk).order_by('name')
-
-#     content = {
-#         'title': title,
-#         'category': category,
-#         'objects': products_list,
-#     }
-
-#     return render(request, 'adminapp/products.html', content)
-
-
-# def product_create(request, pk):
-#     pass
-
-
-# def product_read(request, pk):
-#     pass
-
-
-# def product_update(request, pk):
-#     pass
-
-
-# def product_delete(request, pk):
-#     pass
+@user_passes_test(lambda u: u.is_superuser)
+def admin_products_categories_remove(request,  ProductCategory_id):
+    # U - Update
+    category = ProductCategory.objects.get(id=ProductCategory_id)
+    # category.delete()
+    category.is_active = False
+    category.save()
+    return HttpResponseRedirect(reverse('admin_staff:admin_products_categories'))
