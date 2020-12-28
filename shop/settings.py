@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'authapp',
-    'basketapp'
+    'basketapp',
+    'adminapp'
 
 ]
 
@@ -132,3 +133,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'authapp.User'
+
+LOGIN_URL = '/authapp/login/'
