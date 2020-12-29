@@ -1,5 +1,5 @@
 # Create your views here.
-from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm
+
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
@@ -15,142 +15,26 @@ from adminapp.forms import UserAdminRegisterForm, UserAdminProfileForm, UserAdmi
 from django.shortcuts import get_object_or_404
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def index(request):
-#     return render(request, 'adminapp/index.html')
-
-
-# # Следующие контроллеры демонстрируют принцип CRUD
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_create(request):
-#     # C - Create
-#     if request.method == 'POST':
-#         form = UserAdminRegisterForm(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('adminapp:admin_users'))
-#             # Здесь по другому написано было
-#         else:
-#             print(form.errors)
-#     else:
-#         form = UserAdminRegisterForm()
-#     context = {'form': form}
-#     return render(request, 'adminapp/admin-users-create.html', context)
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users(request):
-#     # R - Read
-#     context = {
-#         'users': User.objects.all(),
-#     }
-#     return render(request, 'adminapp/admin-users-read.html', context)
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_update(request, user_id):
-#     # U - Update
-#     user = User.objects.get(id=user_id)
-#     if request.method == 'POST':
-#         form = UserAdminProfileForm(
-#             data=request.POST, files=request.FILES, instance=user)  # instance Экземпляр формы модели, прикрепленный к объекту модели
-#         # атрибут, который дает его методам доступ к этому конкретному экземпляру модели.
-#         # Здесь передают  полям текущей формы данные из объекта User
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('admin_staff:admin_users'))
-#     else:
-#         form = UserAdminProfileForm(instance=user)
-
-#     context = {'form': form, 'user': user}
-#     return render(request, 'adminapp/admin-users-update-delete.html', context)
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users_remove(request, user_id):
-#     user = User.objects.get(id=user_id)
-#     # user.delete()
-#     user.is_active = False
-#     user.save()
-#     return HttpResponseRedirect(reverse('admin_staff:admin_users'))
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def admin_products_categories(request):
-    # R - Read
-    context = {
-        # Внес изменения на свой класс не сработало, надо разбтраться
-        'ProductsCategories': ProductCategory.objects.all(),
-    }
-    return render(request, 'adminapp/admin-products-categories.html', context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def admin_products_categories_create(request):
-    # C - Create
-    if request.method == 'POST':
-        form = UserAdminProductCategory(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('adminapp:admin_products_categories'))
-            # Здесь по другому написано было
-        else:
-            print(form.errors)
-    else:
-        form = UserAdminProductCategory()
-    context = {'form': form}
-    return render(request, 'adminapp/admin-products-category-create.html', context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def admin_products_categories_update(request,  ProductCategory_id):
-    # U - Update
-    category = ProductCategory.objects.get(id=ProductCategory_id)
-    if request.method == 'POST':
-        form = UserAdminCategoriesForm(
-            data=request.POST, files=request.FILES, instance=category)
-        # атрибут, который дает его методам доступ к этому конкретному экземпляру модели.
-        # Здесь передают  полям текущей формы данные из объекта ProductCategory
-
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('admin_staff:admin_products_categories'))
-    else:
-        form = UserAdminCategoriesForm(instance=category)
-
-    context = {
-        'form': form,
-        'ProductCategory': category
-    }
-    return render(request, 'adminapp/admin-products-categories-update-delete.html', context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def admin_products_categories_remove(request,  ProductCategory_id):
-    # U - Update
-    category = ProductCategory.objects.get(id=ProductCategory_id)
-    # category.delete()
-    category.is_active = False
-    category.save()
-    return HttpResponseRedirect(reverse('admin_staff:admin_products_categories'))
-
-
-# Это было учебные методы для понятия процесса формирования url, views, models откуа вссе берется
-# Ниже предаствалено современные способы обработки через классы ивстренные бииблиотеки
-
-
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
     return render(request, 'adminapp/index.html')
 
 
 class UsersListView(ListView):
+    # Обязательно прописать путь к этомму классу в URLS+ .as_view()
     model = User
     template_name = 'adminapp/admin-users-read.html'
+    #  Но здесь будет универсальный объект на выходе который передается ключ в request
+    #  имя этого ключа: object_list=====> в HTML  документах при использовании данного класса
+    #  Использовать ссылку на object_list
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+    # Пользователь не будет иметь доступ к странице если он не суперюзер
+    def dispatch(self, request, *args, **kwargs):
+        # Метод диспатч встроенный овечает за отображение страницы с пользователями
+        #  мы его вызвали только для того чтобы покрыть его декоратором
+        # Мы его не переоперделяем и ничего с ним не делаем
+        return super(UsersListView, self).dispatch(request, *args, **kwargs)
 
 
 class UsersCreateView(CreateView):
@@ -160,25 +44,100 @@ class UsersCreateView(CreateView):
     form_class = UserAdminRegisterForm
 
 
-class UsersUpdateView(UpdateView):
+class UserUpdateView(UpdateView):
     model = User
     template_name = 'adminapp/admin-users-update-delete.html'
-    success_url = reverse_lazy('admin_staff:admin_users')
+    success_url = reverse_lazy('adminapp:admin_users')  # Здесь по своему
     form_class = UserAdminProfileForm
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        # при переопеределении не забывать передавать параметры
+        #  того что мы переопределяем
+        context = super(UserUpdateView, self).get_context_data(**kwargs)
         context['title'] = 'GeekShop - Редактирование пользователя'
+        # здесь можно context.update() использоавать - это словарь
         return context
 
 
 class UserDeleteView(DeleteView):
     model = User
     template_name = 'adminapp/admin-users-update-delete.html'
-    success_url = reverse_lazy('admin_staff:admin_users')
+    success_url = reverse_lazy('adminapp:admin_users')
+# Вставили форму отправки данных
+# из за того что встроенный метод удаления, который нам показали, в джанго
+# не работает с кнопками.
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.is_active = False
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+# Здесь мы переопределили delete() встроенный, потомучто мы не удаляем а делаем неактивным
+
+
+class ProductCategoriesView(ListView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-products-categories.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    # Здесь необходимо использовать именно метод обертки обертки(С ума сойти!!!!!! Но работает ...)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+class ProductCategoriesCreateView(CreateView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-products-category-create.html'
+    success_url = reverse_lazy('adminapp:admin_products_categories')
+    form_class = UserAdminProductCategory
+
+
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-products-categories-update-delete.html'
+    success_url = reverse_lazy('adminapp:admin_products_categories')
+
+    form_class = UserAdminCategoriesForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductCategoryUpdateView,
+                        self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Редактирование категории'
+        return context
+
+
+#         # при переопеределении не забывать передавать параметры-name class
+#         #  того что мы переопределяем
+#         # здесь можно context.update() использоавать - это словарь
+
+
+#         # атрибут, который дает его методам доступ к этому конкретному экземпляру модели.
+#         # Здесь передают  полям текущей формы данные из объекта ProductCategory
+
+#  Здесь я Product  в 2 местах поменял на object заработало. Потому что в
+# Основное отличие класса UpdateView от CreateView, это передача экземпляра изменяемого объекта атрибуту object данного класса.
+
+
+class ProductCategoryDelete(DeleteView):
+    model = ProductCategory
+    template_name = 'adminapp/admin-products-categories-update-delete.html'
+    success_url = reverse_lazy('adminapp:admin_products_categories')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def admin_products_categories_remove(request,  ProductCategory_id):
+#     # U - Update
+#     category = ProductCategory.objects.get(id=ProductCategory_id)
+#     # category.delete()
+#     category.is_active = False
+#     category.save()
+#     return HttpResponseRedirect(reverse('adminapp:admin_products_categories'))
+
+
+# Это было учебные методы для понятия процесса формирования url, views, models откуа вссе берется
+# Ниже предаствалено современные способы обработки через классы ивстренные бииблиотеки

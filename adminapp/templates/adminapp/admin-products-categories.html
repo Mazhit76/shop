@@ -25,14 +25,13 @@
                     </tr>
                   </tfoot>
                     <tbody>
-                    {% for ProductCategory in ProductsCategories %}
+                    {% for ProductCategory in object_list %}
                         <tr>
                             <td>
-                                <a href="{% url 'admin_staff:admin_products_categories_update' ProductCategory.id %}" style="color: dodgerblue">
+                                <a href="{% url 'adminapp:admin_products_categories_update' ProductCategory.id %}" style="color: dodgerblue">
                                     {{ ProductCategory.name }}
                                 </a>
                             </td> 
-                            {% comment %} <td>{{ ProductCategory.name }}</td> {% endcomment %}
                             <td>{{ ProductCategory.descripthion }}</td>
                             <td class="text-center">
                                 {% if ProductCategory.is_active %}
