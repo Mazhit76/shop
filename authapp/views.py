@@ -1,11 +1,10 @@
 from django.conf import settings
-from django.contrib.auth.forms import UsernameField
 from django.core.mail import send_mail
-from django.http.response import HttpResponseRedirect
-from authapp.forms import UserLoginForm, UserRegisterForm
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.urls import reverse
+
+from authapp.models import User
 from basketapp.models import Basket
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
@@ -67,14 +66,14 @@ def register(request):
         if form.is_valid():  # Здесь мы проверяем методам джанго правильность ввода логина и имени
             user = form.save()
 
-            #Add let user1
+            # Add let user1
             if send_verify_email(user):
                 print('Сообщение подтверждения отправленно!')
                 return HttpResponseRedirect(reverse('authapp:login'))
             else:
                 print('Ошибка отправки сообщения!')
                 return HttpResponseRedirect(reverse('authapp:login'))
-                #Если все ок то сохраняем форму
+                # Если все ок то сохраняем форму
             messages.success(request, 'Вы успешно зарегистрировались!')
             new_user = auth.authenticate(
                 username=form.cleaned_data['username'], password=form.cleaned_data['password2'])
@@ -99,14 +98,29 @@ def logout(request):
     return HttpResponseRedirect(reverse('main'))
 
 def verify(request, email, activation_key):
-    print(request, email, activation_key)
+    try:
+        user = User.objects.get(email=email) #  Может быть ошибка
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active = True
+            if user.is_activation_key_expired():
+                user.activation_key =None # Я так понял здесь препод убирает ключ активаци после проверки, чтобы одноразовая
+            user.save()
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return render(request,'authapp/verification.html')
+        else:
+            print(f'error activation user: {user}')
+            return render(request, 'authapp/verification.html')
+    except Exception as e:
+        print(f'error activation user: {e.args}')
+        return HttpResponseRedirect(reverse('main')) #  Надо проверить эту ссылку
 
 def send_verify_email(user):
     verify_link = reverse('authapp:verify', args=[user.email, user.activation_key])
     # Здесь ошибка должно быть заполение страницы добавлен код отображения и activation_key такого нет ругается
     subject = f'Подтверждение учетной записи {user.username}'
 
-    message = f'Для подтверждения учетной записи {user.username} на портале {settings.DOMAIN_NAME} перейдите по ссылке: ' \
+    message = f'Для подтверждения учетной записи {user.username}' \
+              f' на портале {settings.DOMAIN_NAME} перейдите по ссылке: ' \
               f'\n{settings.DOMAIN_NAME}{verify_link}'
 
 
