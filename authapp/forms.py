@@ -73,3 +73,28 @@ class UserProfileForm(UserChangeForm):
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
         self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
+class UserProfileEditForm(forms.ModelForm):
+    # Но все-таки это объект, и поэтому:
+    #
+    # вы можете присвоить его переменной
+    # вы можете скопировать его
+    # вы можете добавить к нему атрибуты
+    # вы можете передать его в качестве параметра функции
+
+    class Meta:
+#         Метаданные модели - это «все, что не является полем»,
+#         например параметры упорядочения ( ordering), имя таблицы базы данных ( db_table)
+#         или удобочитаемые имена в единственном и множественном числе ( verbose_name и verbose_name_plural).
+#         Который позволяет добавлять дополнительные параметры в класс с помощью class Meta .
+#         Он определяет такие вещи, как доступные разрешения, связанное имя таблицы базы данных,
+#         является ли модель абстрактной или нет, сингулярная и множественная версии имени и т.д.
+#           type -это просто класс, который создает объекты класса.
+    model = UserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = ShopUserProfile
+        fields = ('tagline', 'aboutMe', 'gender')
+
+    def __init__(self, *args, **kwargs):
+        super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
