@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.db import transaction
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.urls import reverse
 
 from authapp.models import User
+from authapp.forms import UserProfileEditForm
 from basketapp.models import Basket
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
@@ -125,3 +127,24 @@ def send_verify_email(user):
 
 
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+
+# @transaction.atomic
+def edit(request):
+    title = 'редактирование'
+
+    if request.method =='POST':
+        edit_form = UserProfileEditForm(request.POST, request.FILES, instance=request.user)
+        profile_form = UserProfileEditForm(request.POST, instance=request.user.userprofile)
+        if edit_form.is_valid() and profile_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('auth:edit'))
+        else:
+            edit_form = UserProfileEditForm(instance=request.user)
+            profile_form = UserProfileEditForm(instance=request.user.userprofile)
+        content = {
+            'title': title,
+            'edit_form': edit_form,
+            'profile_form': profile_form
+        }
+
+        return render(request, 'auth/edit.html', content)

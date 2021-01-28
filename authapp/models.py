@@ -5,7 +5,9 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from django.utils.timezone import now
+
 
 
 class User(AbstractUser):
@@ -56,4 +58,7 @@ class UserProfile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.userprofile.save()
-        # Здесь мы получили объект который был сохранен ранее, это ccылка на UserProfile в виде userprofile, через OneToOneField и его сохраняем
+        # Здесь мы получили объект который был сохранен ранее,
+
+
+        # это ccылка на UserProfile в виде userprofile, через OneToOneField и его сохраняем
