@@ -30,6 +30,7 @@ class UserProfile(models.Model):
     MALE = 'M'
     FEMALE = "W"
     GENDER_CHOICES = (
+        (None, 'Введите Ваш пол'),
         (MALE, 'М'),
         (FEMALE, 'Ж'),
     )

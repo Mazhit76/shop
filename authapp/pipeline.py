@@ -6,7 +6,7 @@ import requests
 from django.utils import timezone
 from social_core.exceptions import AuthForbidden
 
-from authapp.models import ShopUserProfile
+from authapp.models import UserProfile
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
@@ -29,10 +29,10 @@ def save_user_profile(backend, user, response, *args, **kwargs):
 
     data = resp.json()['response'][0]
     if data['sex']:
-        user.shopuserprofile.gender = ShopUserProfile.MALE if data['sex'] == 2 else ShopUserProfile.FEMALE
+        user.userprofile.gender = UserProfile.MALE if data['sex'] == 2 else UserProfile.FEMALE
 
     if data['about']:
-        user.shopuserprofile.aboutMe = data['about']
+        user.userprofile.aboutMe = data['about']
 
     if data['bdate']:
         bdate = datetime.strptime(data['bdate'], '%d.%m.%Y').date()

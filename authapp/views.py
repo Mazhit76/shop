@@ -42,11 +42,11 @@ def login(request):
     return render(request, 'authapp/login.html', context)
 
 
-@transaction.atomic
+# @transaction.atomic
+# Not work edit
 def profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(
-            data=request.POST, files=request.FILES, instance=request.user)
+        form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
         profile_form = UserProfileEditForm(data=request.POST, instance=request.user.userprofile)
         if form.is_valid() and profile_form.is_valid():
             form.save()
