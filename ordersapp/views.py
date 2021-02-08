@@ -54,10 +54,11 @@ class OrderItemsCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
+                basket_items.delete()
             else:
                 formset = OrderFormSet()
-
         data['orderitems'] = formset
+
         return data
 
     def form_valid(self, form):
@@ -90,27 +91,12 @@ class OrderItemsUpdate(UpdateView):
         OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
 
         if self.request.POST:
-            data['orderitems'] = OrderFormSet(self.request.POST, instance=self.object)
-            formset = OrderFormSet(self.request.POST)
+            formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
-            data['orderitems'] = OrderFormSet(instance=self.object)
-            basket_items = Basket.objects.filter(user=self.request.user)
-    #         При редактировании объект заказа уже существует - передаем его в набор форм:
-            OrderFormSet(instance=self.object)
-            formset = OrderFormSet()
-
-
-            if basket_items.exists():
-                OrderFormSet = inlineformset_factory(Order, OrderItem,
-                                                     form=OrderItemForm, extra=basket_items.count())
-                formset = OrderFormSet()
-                for num, form in enumerate(formset.forms):
-                    form.initial['product'] = basket_items[num].product
-                    form.initial['quantity'] = basket_items[num].quantity
-            else:
-                formset = OrderFormSet()
+            formset = OrderFormSet(instance=self.object)
 
         data['orderitems'] = formset
+
         return data
 
     def form_valid(self, form):
@@ -130,4 +116,19 @@ class OrderItemsUpdate(UpdateView):
 
             return super().form_valid(form)
 
+class OrderDelete(DeleteView):
+    model = Order
+    success_url = reverse_lazy('order:orders')
 
+
+class OrderRead(DetailView):
+    model = Order
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'заказ/просмотр'
+    #     return context
+
+def order_forming_complete(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = Order.SENT_TO_PROCEED
+    order.save()
