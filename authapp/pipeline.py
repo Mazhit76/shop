@@ -1,3 +1,4 @@
+import urllib.request
 from collections import OrderedDict
 from datetime import datetime
 from urllib.parse import urlencode, urlunparse
@@ -7,6 +8,7 @@ from django.utils import timezone
 from social_core.exceptions import AuthForbidden
 
 from authapp.models import UserProfile
+from shop.settings import BASE_DIR
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
@@ -41,5 +43,9 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         if age < 18:
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
+
+    # if data['photo_400_orig']:
+    #     urllib.request.urlretrieve(data['photo_400_orig'], BASE_DIR / f'media/users_avatars/{user.pk}.jpg')
+    #     user.avatar = 'users_avatars/{user.pk}.jpg'
 
     user.save()

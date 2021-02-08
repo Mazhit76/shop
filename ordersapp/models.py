@@ -3,6 +3,14 @@ from django.db import models
 from django.conf import settings
 from mainapp.models import Product
 
+class OrderItemQuerySet(models.QuerySet):
+
+    def delete(self, *args, **kwargs):
+        for object in self:
+            object.product.quantity += object.quantity
+            object.product.save()
+        super(OrderItemQuerySet, self).delete(*args, **kwargs)
+
 
 class Order(models.Model):
     FORMING = 'FM'
@@ -61,6 +69,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+
+    objects = OrderItemQuerySet.as_manager()
+
     order = models.ForeignKey(Order,
                               related_name="orderitems",
                               on_delete=models.CASCADE)
