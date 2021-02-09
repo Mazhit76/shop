@@ -132,3 +132,4 @@ def order_forming_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = Order.SENT_TO_PROCEED
     order.save()
+    return HttpResponseRedirect('order:orders')
