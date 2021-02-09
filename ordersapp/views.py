@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
-
+from django.db.models.signals import pre_save, pre_delete
 from django.forms import inlineformset_factory
 from django.db import transaction
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -14,6 +14,7 @@ from django.urls import reverse, reverse_lazy
 from basketapp.models import Basket
 from ordersapp.models import Order, OrderItem
 from ordersapp.forms import OrderItemForm
+from django.dispatch import receiver
 
 
 
@@ -54,7 +55,7 @@ class OrderItemsCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-                basket_items.delete()
+                # basket_items.delete()
             else:
                 formset = OrderFormSet()
         data['orderitems'] = formset
@@ -67,6 +68,7 @@ class OrderItemsCreate(CreateView):
 
         with transaction.atomic():
             #  для защиты от сбоев, если что откатывается
+            Basket.objects.filter(user=self.request.user).delete()
             form.instance.user = self.request.user
             self.object = form.save()
             if orderitems.is_valid():
@@ -134,3 +136,28 @@ def order_forming_complete(request, pk):
     order.save()
 
     return HttpResponseRedirect(reverse('order:orders'))
+
+
+# При нажатии кнопки с вызовом save() вызвыается данный участок кода и далее стандртный save()
+
+@receiver(pre_save, sender=Basket)
+@receiver(pre_save, sender=OrderItem)
+def product_quantity_save(sender, update_fields, instance, **kwargs):
+    #  В версиях после 3.00 работает не всегда корректно и чтобы отрабатывал корректно где  save(прописывать поля которые
+    #  нужно update делать)
+    if update_fields is 'quantity' or 'product':
+        if instance.pk:
+            instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        #     здесь опять ошибка с get_item, в нашем проекте его нет 1.00.
+        #  В методичке этого не было препод реализовал метод фильтрациии как и раньше делал толко прописал в методе к ко
+        # торому можно обращатся извне
+        else:
+            instance.product.quantity -= instance.quantity
+        instance.product.save()
+
+
+@receiver(pre_delete, sender=Basket)
+@receiver(pre_delete, sender=OrderItem)
+def product_quantity_delete(sender, instance, **kwargs):
+   instance.product.quantity += instance.quantity
+   instance.product.save()
