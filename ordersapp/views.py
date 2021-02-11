@@ -1,6 +1,6 @@
 
 from django.shortcuts import render
-
+from django.http import JsonResponse
 # Create your views here.
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -16,6 +16,8 @@ from ordersapp.models import Order, OrderItem
 from ordersapp.forms import OrderItemForm
 from django.dispatch import receiver
 
+from django.http import JsonResponse
+from mainapp.models import Product
 
 
 class OrderList(ListView):
@@ -172,3 +174,14 @@ def product_quantity_delete(sender, instance, **kwargs):
    instance.product.quantity += instance.quantity
    instance.product.save()
 
+
+# Пишем ajax обработчик
+
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product_item = Product.objects.filter(pk=int(pk)).first()
+        if product_item:
+            return JsonResponse({'price': product_item.price})
+        else:
+            return JsonResponse({'price': 0})
