@@ -2,38 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98ddf639-e6de-404b-b2ef-40ae54afd3ae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/adminapp/management/my_prog.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminapp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminapp/migrations/0002_delete_productcategoryeditform.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0002_auto_20210114_1220.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0002_auto_20210117_0941.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0003_auto_20210117_1300.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0004_auto_20210117_1911.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0005_auto_20210117_1940.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0006_merge_20210127_2125.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0007_auto_20210127_2125.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0008_auto_20210127_2325.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0009_auto_20210128_1430.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0010_auto_20210129_0142.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0011_auto_20210129_1443.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0012_auto_20210202_1530.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0013_auto_20210202_1659.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0014_auto_20210203_1409.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0015_auto_20210203_1446.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0016_auto_20210203_1514.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0017_auto_20210206_1729.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0018_auto_20210209_2040.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0019_auto_20210210_1243.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0020_auto_20210211_1633.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authapp/migrations/0021_auto_20210211_1904.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/basketapp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/migrations/0002_product_is_active.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ordersapp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ordersapp/migrations/0002_auto_20210203_1446.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminapp/templates/adminapp/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/adminapp/templates/adminapp/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/templates/authapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/authapp/templates/authapp/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainapp/templates/mainapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/templates/mainapp/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ordersapp/templates/ordersapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ordersapp/templates/ordersapp/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
