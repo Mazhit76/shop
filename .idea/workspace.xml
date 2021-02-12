@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="98ddf639-e6de-404b-b2ef-40ae54afd3ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/adminapp/management/my_prog.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminapp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminapp/migrations/0002_delete_productcategoryeditform.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0002_auto_20210114_1220.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0002_auto_20210117_0941.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0003_auto_20210117_1300.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0004_auto_20210117_1911.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0005_auto_20210117_1940.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0006_merge_20210127_2125.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0007_auto_20210127_2125.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0008_auto_20210127_2325.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0009_auto_20210128_1430.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0010_auto_20210129_0142.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0011_auto_20210129_1443.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0012_auto_20210202_1530.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0013_auto_20210202_1659.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0014_auto_20210203_1409.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0015_auto_20210203_1446.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0016_auto_20210203_1514.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0017_auto_20210206_1729.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0018_auto_20210209_2040.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0019_auto_20210210_1243.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0020_auto_20210211_1633.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authapp/migrations/0021_auto_20210211_1904.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/basketapp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainapp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainapp/migrations/0002_product_is_active.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ordersapp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ordersapp/migrations/0002_auto_20210203_1446.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/settings.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/static/js/orders_script.js" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ordersapp/views.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ordersapp/forms.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ordersapp/urls.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ordersapp/templates/ordersapp/order_form.html" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ordersapp/templates/ordersapp/order_list.html" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectId" id="1oJtEetKjpcmNayuUqwWEQPJoPg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="pyconsole" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="MainModule" sdk-home="$PROJECT_DIR$/venv/Scripts/python.exe">
+        <option name="mySdkHome" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
+        <option name="myModuleName" value="MainModule" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.manage">
+    <configuration default="true" type="NodeJSConfigurationType" path-to-node="$APPLICATION_HOME_DIR$/plugins/NodeJS/js/mocha-intellij/lib/mocha-intellij-stringifier.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="orders_script.js" type="NodeJSConfigurationType" temporary="true" path-to-node="$APPLICATION_HOME_DIR$/plugins/NodeJS/js/mocha-intellij/lib/mocha-intellij-stringifier.js" nameIsGenerated="true" path-to-js-file="orders_script.js" working-dir="$PROJECT_DIR$/static/js">
+      <method v="2" />
+    </configuration>
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="MainModule" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/Scripts/python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.orders_script.js" />
+      <item itemvalue="Python.manage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.orders_script.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="98ddf639-e6de-404b-b2ef-40ae54afd3ae" name="Default Changelist" comment="" />
+      <created>1613016437745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613016437745</updated>
+      <workItem from="1613016462356" duration="3000" />
+      <workItem from="1613017110919" duration="989000" />
+      <workItem from="1613018202295" duration="1214000" />
+      <workItem from="1613019651937" duration="9168000" />
+      <workItem from="1613037287192" duration="10561000" />
+      <workItem from="1613050604369" duration="17691000" />
+      <workItem from="1613130005956" duration="258000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Lession_Django$manage.coverage" NAME="manage Coverage Results" MODIFIED="1613065490400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lession_Django$MyProject.coverage" NAME="MyProject Coverage Results" MODIFIED="1613045622306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
